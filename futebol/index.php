@@ -28,6 +28,7 @@
     require_once 'jogo-class.php';
     require_once 'time-class.php';
     
+        //criar times "NOMETIME" , forçatime;
     $time[1] = new time("Varzea Futebol Clube", 95);
     $time[2] = new time("Gramados Unity", 85);
     $time[3] = new time("Europa Time", 75);
@@ -35,9 +36,10 @@
     $time[5] = new time("Time Mineiro", 75);
     $time[6] = new time("Paulistinha FC", 65);
     
+    
     $j = 0;
-    $totalTimes = 6;
-    $numeroJogos = 50;
+    $totalTimes = 6; // quantidade de times cadastrados
+    $numeroJogos = 50; //quantidade de repetições para jogos
     while ( $j < $numeroJogos ){
     $jogo[$j] = new jogo();
     $jogo[$j]->comecarPartida($time[rand(1,$totalTimes)], $time[rand(1,$totalTimes)]);
