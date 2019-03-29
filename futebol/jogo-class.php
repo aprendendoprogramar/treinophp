@@ -45,7 +45,7 @@ class jogo {
                 $this->timeVisitante->setVitoria();
                 //setar pontos
                 $this->timeVisitante->setPontos(3);
-            } else if ($golsCasa = $golsVisitante){
+            } else if ($golsCasa === $golsVisitante){
                 //empate
                 $this->timeCasa->setEmpate();
                 $this->timeVisitante->setEmpate();
