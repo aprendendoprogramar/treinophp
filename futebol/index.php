@@ -54,7 +54,7 @@
                     ?>
                 </td>
                 <td colspan="7">
-                    <h2>Futebol Clube 2020</h2>
+                    <h2>Futebol Club 2020</h2>
                 </td>
             </tr>
             
