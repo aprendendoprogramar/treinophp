@@ -31,13 +31,22 @@ tabela partida
     part_rodada
     part_data
     
+Regras:
+O campeona
+//por enquanto será aleatorio
+Aleatorio 0 - 4to é criado por uma pessoa real.
+Cada campeonato pode ter até X times.
+A cada X tempo é liberado o botão para realizar 1 jogo aleatórios entre cada time do torneio local.
+
+
+Sistema de Gols:
 
 calcular Gols ->
 //por enquanto será aleatorio
 Aleatorio 0 - 4
 
 sorteio de jogos ->
-shuffle com array de jogos
+shuffle com array dos times
 
 
 
