@@ -32,9 +32,7 @@ tabela partida
     part_data
     
 Regras:
-O campeona
-//por enquanto será aleatorio
-Aleatorio 0 - 4to é criado por uma pessoa real.
+O campeonato é criado por uma pessoa real.
 Cada campeonato pode ter até X times.
 A cada X tempo é liberado o botão para realizar 1 jogo aleatórios entre cada time do torneio local.
 
