@@ -12,7 +12,7 @@ class campeonato{
             
     public function __construct($id) {
         
-        require 'bdconfig.php';
+        require 'config/bdconfig.php';
         $sql = "SELECT * FROM campeonato WHERE camp_id = ". $id  ;
         $result = $conn->query($sql);
         while($row = $result->fetch_assoc()) {
