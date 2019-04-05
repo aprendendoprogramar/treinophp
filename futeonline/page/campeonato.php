@@ -19,30 +19,41 @@
                  require_once 'page/inicio.php';
             }else{
 
-            $n = 1;
-            $sql = "SELECT * FROM time  WHERE `time_refCampeonato` = " . $id  ;
+            $n = 0;
+            $sql = "SELECT * FROM time  WHERE `time_refCampeonato` = " . $id . "  ORDER BY `time_pontos` DESC"  ;
             $result = $conn->query($sql);
             while($row = $result->fetch_assoc()) {
-                $time[$n] = new time($row["time_nome"]);
+                $time[$n] = new time($row["time_id"]);
+                $timeID[$n] = $row["time_id"];
                 $n ++;
             }
     ?>
             <table cellspacing='0' cellpadding='2'>
                 <tr>
-
                         <?php 
                             if (!empty($time)){
                                 $totalTimes = sizeof($time);
                             }
-
                             if (!empty($totalTimes)){
                                 echo "<td rowspan='10'>";
                                 $j = 0;
-                                $numeroJogos = 10;
-                                while ( $j < $numeroJogos ){
+                                $n = 0;
+                                shuffle($timeID);
+                                //verifica se tem numero par de time
+                                if (($totalTimes % 2) <> 1){
+                                    //se for par, divide por 2 para ver total de partidas na rodada
+                                        $totalPartidas = $totalTimes / 2;
+                                }else{
+                                    // se for impar, tira um time e divide por dois, para calcular total de partidas
+                                    $totalPartidas = ($totalTimes - 1 ) / 2;
+                                }
+                                while ( $j < $totalPartidas ){
                                 $jogo[$j] = new jogo();
-                                $jogo[$j]->comecarPartida($time[rand(1,$totalTimes)], $time[rand(1,$totalTimes)]);
+                                $jogo[$j]->comecarPartida($timeID[$n], $timeID[$n + 1], "1", "2");
+                                echo $time[$n]->getNome() . " vs " . $time[$n+1]->getNome() . "<br>";
                                 $j++;
+                                $n++;
+                                $n++;
                                 }
                             echo "</td>";
                             }
@@ -68,27 +79,23 @@
                 </tr>
                 <?php 
 
-                $i = 1;
-                if(!empty($totalTimes)){
-                    while ( $i <= $totalTimes){
+                    $n = 0;
+                    while ($n < $totalTimes){
                         echo "<tr>
-                                <td class='alinhar-e'>{$time[$i]->getNome()}</td>
-                                <td>{$time[$i]->getPontos()}</td>
-                                <td>{$time[$i]->getSaldoGols()}</td>
-                                <td>{$time[$i]->getGolsSofridos()}</td>
-                                <td>{$time[$i]->getVitoria()}</td>
-                                <td>{$time[$i]->getDerrotas()}</td>
-                                <td>{$time[$i]->getEmpate()}</td>
+                            <td class='alinhar-e'>{$time[$n]->getNome()}</td>
+                            <td class='alinhar-e'>{$time[$n]->getPontos()}</td>
+                            <td class='alinhar-e'>{$time[$n]->getSaldoGols()}</td>
+                            <td class='alinhar-e'>{$time[$n]->getGolsSofridos()}</td>
+                            <td class='alinhar-e'>{$time[$n]->getVitoria()}</td>
+                            <td class='alinhar-e'>{$time[$n]->getDerrotas()}</td>
+                            <td class='alinhar-e'>{$time[$n]->getEmpate()}</td>
                             </tr>";
-                        $i ++;    
+                        $n ++;
                     }
-                }else{
-                    echo "<td colspan='10'><br/><br/>O criador deste campeonato ainda não cadastrou times <br/> Se você criou este campeonato clique aqui<br/><br/></tr>";
-                }
-
-            } 
-        }
-        else{
+               
+                
+            }
+        }else{
             require_once 'page/error.php';
         }
 ?>

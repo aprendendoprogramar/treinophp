@@ -8,14 +8,21 @@ class time{
     private $derrotas;
     private $empate;
 
-    public function __construct($nome) {
-        $this->setNome($nome);
-        $this->saldoGols = 0;
-        $this->pontos = 0;
-        $this->golsSofridos = 0;
-        $this->vitoria = 0;
-        $this->empate = 0;
-        $this->derrotas = 0;
+    public function __construct($id) {
+        
+        require 'config/bdconfig.php';
+        $sql = "SELECT * FROM time  WHERE `time_id` = " . $id  ;
+        $result = $conn->query($sql);
+        while($row = $result->fetch_assoc()) {
+            $this->setNome($row["time_nome"]);
+            $this->setPontos($row["time_pontos"]);
+            $this->setSaldoGols($row["time_golsFeitos"]);
+            $this->setDerrotas($row["time_derrotas"]);
+            $this->setGolsSofridos($row["time_golsSofridos"]);
+            $this->setEmpate($row["time_empates"]);
+            $this->setVitoria($row["time_vitorias"]);
+            $this->setDerrotas($row["time_derrotas"]);
+            }
     }
     
     function setNome($nome) {
@@ -30,15 +37,15 @@ class time{
     function setGolsSofridos($golsSofridos) {
         $this->golsSofridos = $golsSofridos;
     }
-    function setVitoria() {
-        $this->vitoria = $this->getVitoria() + 1;
+    function setVitoria($vitorias) {
+        $this->vitoria = $vitorias;
         
     }
-    function setDerrotas() {
-        $this->derrotas = $this->getDerrotas() + 1;
+    function setDerrotas($derrotas) {
+        $this->derrotas = $derrotas;
     }
-    function setEmpate() {
-        $this->empate = $this->getEmpate() + 1;
+    function setEmpate($empates) {
+        $this->empate = $empates;
     }
 
     function getNome() {
